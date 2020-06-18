@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from behave import *
@@ -44,9 +45,10 @@ def step_impl(context):
     context.browser.implicitly_wait(5)
     context.browser.execute_script("window.scrollBy(0,500)", "")
     context.browser.implicitly_wait(5)
-    el = context.browser.find_element(By.ID, 'triggerFormD')
-    hover = ActionChains(context.browser).move_to_element(el)
+    el = driver.find_element(By.ID, 'triggerFormD')
+    hover = ActionChains(driver).move_to_element(el)
     hover.perform()
+    WebDriverWait(context.browser, 5).until(EC.element_to_be_clickable((By.ID, 'triggerFormD')))
     el.click()
     context.browser.implicitly_wait(5)
     context.browser.find_element(By.NAME, 'v')
@@ -65,4 +67,3 @@ def step_impl(context):
     print('Новая цена: 4002 руб.')
     print('Тест завершен успешно')
     print('Новая цена: 4002')
-
