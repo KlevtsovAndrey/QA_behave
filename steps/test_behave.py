@@ -40,13 +40,13 @@ def step_impl(context):
     EC.text_to_be_present_in_element((By.ID, 'f_fp'), '3726')
     print('Цена: 3726 руб.')
 
-@then(u'Add a city to the route (г. Тула - г. Великий Новгород - г. Санкт-Петербург)')
+@then(u'Add a new city to the route (г. Тула - г. Великий Новгород - г. Санкт-Петербург)')
 def step_impl(context):
     context.browser.implicitly_wait(5)
     context.browser.execute_script("window.scrollBy(0,500)", "")
     context.browser.implicitly_wait(5)
-    el = driver.find_element(By.ID, 'triggerFormD')
-    hover = ActionChains(driver).move_to_element(el)
+    el = context.browser.find_element(By.ID, 'triggerFormD')
+    hover = ActionChains(context.browser).move_to_element(el)
     hover.perform()
     WebDriverWait(context.browser, 5).until(EC.element_to_be_clickable((By.ID, 'triggerFormD')))
     el.click()
